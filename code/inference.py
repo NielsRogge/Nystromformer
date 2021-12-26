@@ -42,7 +42,7 @@ model = Model(model_config)
 ########################### Forward pass ###########################
 
 text = "hello world"
-encoding = tokenizer(text, padding="max_length", return_tensors = "pt")
+encoding = tokenizer(text, padding="max_length", max_length=model_config["seq_len"], return_tensors = "pt")
 
 outputs = model(input_ids=encoding.input_ids)
 
