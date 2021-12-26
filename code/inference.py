@@ -11,7 +11,6 @@ import pickle
 import numpy as np
 import argparse
 import utils
-import lz4.frame
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--use_data", type = utils.str2bool, help = "use_data", dest = "use_data", default = False)
@@ -43,8 +42,10 @@ model = ModelForMaskedLM(model_config)
 text = "hello world"
 encoding = tokenizer(text, return_tensors = "pt")
 
-outputs = model(**encoding)
+outputs = model(input_ids=encoding.input_ids)
 
+for k,v in outputs.items():
+    print(k, v.shape)
 
 
 
