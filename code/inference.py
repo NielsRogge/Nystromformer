@@ -1,4 +1,5 @@
 from model_wrapper import ModelForMaskedLM
+from model import Model
 from dataset import CorpusDataset, CorpusDatasetV2
 from transformers import BertTokenizer, RobertaTokenizerFast, DataCollatorForLanguageModeling
 from torch.utils.data import DataLoader
@@ -35,7 +36,8 @@ model_config["vocab_size"] = len(tokenizer.get_vocab())
 
 ########################### Loading Model ###########################
 
-model = ModelForMaskedLM(model_config)
+#model = ModelForMaskedLM(model_config)
+model = Model(model_config)
 
 ########################### Forward pass ###########################
 
@@ -44,8 +46,7 @@ encoding = tokenizer(text, return_tensors = "pt")
 
 outputs = model(input_ids=encoding.input_ids)
 
-for k,v in outputs.items():
-    print(k, v.shape)
+print(outputs.shape)
 
 
 
