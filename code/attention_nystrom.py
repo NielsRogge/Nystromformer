@@ -11,7 +11,7 @@ class NystromAttention(nn.Module):
         self.num_head = config["num_head"]
 
         self.num_landmarks = config["num_landmarks"]
-        self.seq_len = config["seq_len"]
+        self.seq_len = config["max_seq_len"]
         
         if "inv_coeff_init_option" in config:
             self.init_option = config["inv_init_coeff_option"]
@@ -27,7 +27,7 @@ class NystromAttention(nn.Module):
                 groups = self.num_head)
 
     def forward(self, Q, K, V, mask):
-
+        
         Q = Q * mask[:, None, :, None] / math.sqrt(math.sqrt(self.head_dim))
         K = K * mask[:, None, :, None] / math.sqrt(math.sqrt(self.head_dim))
 
