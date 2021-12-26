@@ -23,7 +23,7 @@ class SoftmaxAttention(nn.Module):
 
 type = {}
 
-with open("/model/config.json", "r") as f:
+with open("/content/Nystromformer/nystrom-512/config.json", "r") as f:
     config = json.load(f)
 model_config = config["model"]
 
